@@ -25,8 +25,9 @@ async function run(): Promise<void> {
     const run_id = process.env.GITHUB_RUN_ID || "";
     const actionsUrl = `${github_server_url}/${github_repos}/actions/runs/${run_id}`;
     const workflow   = process.env.GITHUB_WORKFLOW || "";
-    const runnerOS   = process.env.RUNNER_OS || "";
+    //const runnerOS   = process.env.RUNNER_OS || "";
     const actor      = process.env.GITHUB_ACTOR || "";
+    const commit_msg = process.env.COMMIT_MSG || "";
 
     (async () => {
       await web.chat.postMessage({ 
@@ -37,7 +38,7 @@ async function run(): Promise<void> {
               "type": "section",
               "text": {
                   "type": "mrkdwn",
-                  "text": `GitHub Actions Approval Request`,
+                  "text": `Deployment Approval Request`,
                 }
             },
             {
@@ -65,7 +66,7 @@ async function run(): Promise<void> {
                 },
                 {
                   "type": "mrkdwn",
-                  "text": `*RunnerOS:*\n${runnerOS}`
+                  "text": `*Commit Message:*\n${commit_msg}`
                 }
               ]
             },
